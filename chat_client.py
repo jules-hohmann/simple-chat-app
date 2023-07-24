@@ -2,6 +2,7 @@ import socket
 import datetime
 
 import server
+import chat_server
 import client
 import message
 import chatroom
@@ -15,13 +16,15 @@ HOST = "0.0.0.0"
 
 messages = []
 
-def init_connections(HOST, PORT, num_conns):
+
+def init_connections(num_conns):
     address = (HOST, PORT)
+    connid = 0
     for i in range(1, len(num_conns) + 1):
-        connid += 1
+        connid = connid + 1
         print(f'Connecting ID {connid} to {address}')
         server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        server.connect_ex(HOST, PORT)
+        server.connect_ex(address)
         server.setblocking(False)
         while True:
             try:
@@ -30,9 +33,14 @@ def init_connections(HOST, PORT, num_conns):
                 messages.append(data)
                 for i in range(len(messages)):
                     print(messages[i], "\n")
-            except :
+            except KeyboardInterrupt:
                 print("Error")
                 server.close()
+
+if __name__ == '__main__':
+    messages = []
+    connid = 0
+    init_connections([1])
             
 
             
