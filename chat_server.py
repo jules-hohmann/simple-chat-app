@@ -14,9 +14,9 @@ if __name__ == "__main__":
             with conn:
                 print("Address: ", addr)
                 data = conn.recv(1024, socket.MSG_DONTWAIT)
-                data=data.decode("UTF-8")
+                data = data.decode("UTF-8")
 
                 if data == None:
-                    break
+                    s.close()
                 else:
                     print(data.strip())
