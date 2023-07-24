@@ -10,7 +10,7 @@ class Chat_server:
     def new_client(self, a=client.Client ):
         self.client_list.append(a)
 
-HOST=socket.gethostbyname(socket.gethostname())
+HOST=""
 PORT = 8005
 print(HOST)
 print(PORT)
@@ -26,6 +26,8 @@ if __name__ == "__main__":
 
     print(HOST)
     print(PORT)
+    HOST=input("GIVE ME YOUR IP!\n")
+    PORT=input("GIVE ME YOUR PORT!\n")
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         '''sets new variable s as the socket'''
         s.bind((HOST, PORT))
