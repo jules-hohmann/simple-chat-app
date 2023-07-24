@@ -20,6 +20,23 @@ IP='10.29.61.108'
 
 
 def init_connections(num_conns):
+    with socket.socket(socket.AF_INET, socket.SOCK_DGRM) as s:
+        ip = socket.gethostbyname(socket.gethostname)
+        conn, addr = s.accept()
+        with conn:
+            while True:
+                data = conn.recv(1024, socket.MSG_DONTWAIT)
+                try:
+                    data = input()
+                except:
+                    print("Exiting")
+                    break
+
+                if(data.strip() == "STOP"):
+                    s.close()
+                else:
+                    continue
+                
 
     '''
     Address variable stores IP and PORT, while connection
@@ -27,7 +44,7 @@ def init_connections(num_conns):
     number of connections. The server is then initialized and the client 
     is connected using address. Setblocking is set to false prevent waiting.
     Append decoded messages from the chat to display them.
-    '''
+    
 
     address = (IP, PORT)
     connid = 0
@@ -50,6 +67,8 @@ def init_connections(num_conns):
                     pass
         except KeyboardInterrupt:
             print(f'Client with ID {connid} leaves the chat')
+        '''
+
 
 if __name__ == '__main__':
     messages = []
