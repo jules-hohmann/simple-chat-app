@@ -7,14 +7,9 @@ PORT = 8005
 
 Dev_client=client.Client("Dev","169.254.34.231", "3476Davinci", 10205,)
 Rome_client=client.Client("Rome","169.254.24.19", "RomePassword31415", 10001)
-<<<<<<< HEAD
 Arthur_client=client.Client("Arthur","169.254.36.171", "SubToMe123", 69696)
 AJ_client=client.Client("AJ","169.254.18.213", "ILuvKorea", 54321)
-=======
-Arthur_client=client.Client()
-Jules_client=client.Client("Jules", "10.29.61.108", "12345")
-AJ_client=client.Client()
->>>>>>> c026605ab136f04c762c8bf3fbab8b43c31b9963
+
 
 
 if __name__ == "__main__":
@@ -29,6 +24,6 @@ if __name__ == "__main__":
                 data = data.decode("UTF-8")
 
                 if data == None:
-                    s.close()
+                    break
                 else:
                     print(data.strip())
