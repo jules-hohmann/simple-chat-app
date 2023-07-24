@@ -2,6 +2,14 @@ import socket
 import datetime
 import client
 
+
+class Chat_server:
+    def __init__(self, client, client_list: list = []):
+        self.client_list = client_list
+
+    def new_client(client.Client a):
+        client_list.append(a)
+
 HOST=socket.gethostbyname(socket.gethostname())
 PORT = 8005
 
