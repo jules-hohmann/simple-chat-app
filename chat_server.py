@@ -5,6 +5,12 @@ import client
 HOST="0.0.0.0"
 PORT=8050
 
+class Chat_server:
+    def __init__(self, client, client_list: list = []):
+        self.client_list = client_list
+
+    def new_client(client.Client a):
+        client_list.append(a)
 
 Dev_client=client.Client("Dev","169.254.34.231", "3476Davinci", 10205,)
 Rome_client=client.Client("Rome","169.254.24.19", "RomePassword31415", 10001)
