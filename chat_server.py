@@ -2,16 +2,14 @@ import socket
 import datetime
 import client
 
-HOST="0.0.0.0"
-PORT=8050
 
 class Chat_server:
     def __init__(self, client, client_list: list = []):
         self.client_list = client_list
 
-    def new_client(client.Client a):
-        client_list.append(a)
-        
+    def new_client(self, a=client.Client ):
+        self.client_list.append(a)
+
 HOST=socket.gethostbyname(socket.gethostname())
 PORT = 8005
 
@@ -19,9 +17,7 @@ Dev_client=client.Client("Dev","169.254.34.231", "3476Davinci", 10205,)
 Rome_client=client.Client("Rome","169.254.24.19", "RomePassword31415", 10001)
 Arthur_client=client.Client("Arthur","169.254.36.171", "SubToMe123", 69696)
 AJ_client=client.Client("AJ","169.254.18.213", "ILuvKorea", 54321)
-Arthur_client=client.Client()
-Jules_client=client.Client("Jules", "10.29.61.108", "12345")
-AJ_client=client.Client()
+
 
 
 if __name__ == "__main__":
@@ -36,6 +32,6 @@ if __name__ == "__main__":
                 data = data.decode("UTF-8")
 
                 if data == None:
-                    s.close()
+                    break
                 else:
                     print(data.strip())
