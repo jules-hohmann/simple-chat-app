@@ -1,7 +1,10 @@
 import socket
-import datetime
+##import datetime
+import requirements.txt
 
-HOST="0.0.0.0"
+HOST=socket.gethostbyname(socket.gethostname())
+
+
 PORT=8050
 
 
@@ -12,11 +15,11 @@ if __name__ == "__main__":
         while True:
             conn, addr= s.accept()
             with conn:
-                
+
                 data = conn.recv(1024, socket.MSG_DONTWAIT)
-                data = data.decode("UTF-8")
+                data=data.decode("UTF-8")
 
                 if data == None:
-                    s.close()
+                    break
                 else:
                     print(data.strip())
