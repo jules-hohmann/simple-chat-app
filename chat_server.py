@@ -1,7 +1,7 @@
 import socket
 import datetime
 
-HOST="10.29.61.108"
+HOST="0.0.0.0"
 PORT=8050
 
 
