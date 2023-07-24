@@ -23,6 +23,9 @@ AJ_client=client.Client("AJ","169.254.18.213", "ILuvKorea", 54321)
 
 
 if __name__ == "__main__":
+
+    print(HOST)
+    print(PORT)
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         '''sets new variable s as the socket'''
         s.bind((HOST, PORT))
