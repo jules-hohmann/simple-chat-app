@@ -8,7 +8,7 @@ PORT = 8005
 Dev_client=client.Client("Dev","169.254.34.231", "3476Davinci", 10205,)
 Rome_client=client.Client("Rome","169.254.24.19", "RomePassword31415", 10001)
 Arthur_client=client.Client()
-Jules_client=client.Client()
+Jules_client=client.Client("Jules", "10.29.61.108", "12345")
 AJ_client=client.Client()
 
 
