@@ -8,11 +8,11 @@ HOST=socket.gethostbyname(socket.gethostname())
 
 PORT=8050
 
-client.Client Dev_client("Dev","169.254.34.231", "3476Davinci", 10205,)
-client.Client Rome_client()
-client.Client Arthur_client()
-client.Client Jules_client()
-client.Client AJ_client()
+Dev_client=client.Client("Dev","169.254.34.231", "3476Davinci", 10205,)
+Rome_client=client.Client("Rome","169.254.24.19", "RomePassword31415", 10001)
+Arthur_client=client.Client()
+Jules_client=client.Client()
+AJ_client=client.Client()
 
 
 client_list=[]
