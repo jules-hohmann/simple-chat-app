@@ -10,32 +10,36 @@ import chatroom
 
 
 PORT = 8050
-HOST = "0.0.0.0"
+hostname = socket.gethostname()
+IP = socket.gethostbyname(hostname)
 
 #IP: 10.29.48.1
 
-messages = []
+
 
 
 def init_connections(num_conns):
-    address = (HOST, PORT)
+    address = (IP, PORT)
     connid = 0
     for i in range(1, len(num_conns) + 1):
         connid = connid + 1
         print(f'Connecting ID {connid} to {address}')
         server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        server.connect_ex(address)
+        server.connect(address)
         server.setblocking(False)
-        while True:
-            try:
-                data = server.recv(1024)
-                data.decode("UTF-8")
-                messages.append(data)
-                for i in range(len(messages)):
-                    print(messages[i], "\n")
-            except KeyboardInterrupt:
-                print("Error")
-                server.close()
+        try:
+            while True:
+                try:
+                    data = server.recv(1024)
+                    data.decode("UTF-8")
+                    messages.append(data)
+                    for i in range(len(messages)):
+                        print(messages[i], "\n")
+                except:
+                    print(address)
+        except KeyboardInterrupt:
+            print(f'Client with ID {connid} leaves the chat')
+            print(data.strip())
 
 if __name__ == '__main__':
     messages = []
