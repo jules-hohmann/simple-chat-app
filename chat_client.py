@@ -28,10 +28,7 @@ def init_connections(num_conns):
     Append decoded messages from the chat to display them.
     '''
 
-
-    
-
-    address = (IP, PORT)
+    address = (IP, int(PORT))
     connid = 0
     for i in range(1, len(num_conns) + 1):
         connid = connid + 1
