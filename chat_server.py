@@ -8,7 +8,10 @@ PORT=8050
 class Chat_server:
     client_list = []
 
-    def new_client(Client a)
+    def new_client(client.Client a):
+        client_list.append(a)
+
+    
 
 
 
