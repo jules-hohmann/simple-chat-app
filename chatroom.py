@@ -16,12 +16,3 @@ class Chatroom:
     def display_messages(self):
         for message in self.messages:
             print(message)
-
-if __name__ == "__main__":
-    chatroom = Chatroom()
-
-    # user1_id = chatroom.join_chatroom("Alice")
-    # user2_id = chatroom.join_chatroom("Bob")
-
-
-    chatroom.display_messages()
