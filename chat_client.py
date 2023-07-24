@@ -61,8 +61,8 @@ def init_connections(num_conns):
 if __name__ == '__main__':
     messages = []
     connid = 0
-    IP=input("Give me your IP")
-    PORT=input("Give me your port")
+    IP=str(input("Give me your IP"))
+    PORT=int(input("Give me your port"))
     init_connections([1])
             
 
