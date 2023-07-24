@@ -7,13 +7,14 @@ import client
 import message
 import chatroom
 
+cl = client.Client()
+se = server.Server()
 
 #Initialize the port and IP address of the server
 #When it runs gethostname, it finds the IP of the computer it's running on
-PORT = 8005
-IP = '10.29.61.108'
+se.port = 8005
+se.ip = '10.29.61.108'
 
-IP='10.29.61.108'
 
 #Jules IP: 10.29.48.1
 #10.29.61.108
@@ -21,21 +22,29 @@ IP='10.29.61.108'
 
 def init_connections(num_conns):
     with socket.socket(socket.AF_INET, socket.SOCK_DGRM) as s:
-        ip = socket.gethostbyname(socket.gethostname)
-        conn, addr = s.accept()
-        with conn:
-            while True:
-                data = conn.recv(1024, socket.MSG_DONTWAIT)
-                try:
-                    data = input()
-                except:
-                    print("Exiting")
-                    break
 
-                if(data.strip() == "STOP"):
-                    s.close()
-                else:
-                    continue
+        username = input("Username: ")
+        password = input("Password: ")
+        uuid = input("UUID: ")
+        personal_ip = input("IP: ")
+
+        cl.username = username
+        cl.password = password
+        cl.uuid = uuid
+        cl.ip_address = personal_ip
+
+        s.connect(se.ip, se.port)
+
+        conn, addr = s.accept()
+        
+        with conn, addr:
+            while True:
+                if addr == se.ip:
+                    data = conn.recv(1024, socket.MSG_DONTWAIT)
+                    if(data.strip() == "STOP"):
+                        s.close()
+                    else:
+                        continue
                 
 
     '''
