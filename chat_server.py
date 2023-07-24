@@ -2,11 +2,20 @@ import socket
 import datetime
 import client
 
-HOST="0.0.0.0"
+HOST=socket.gethostbyname(socket.gethostname())
+
+
 PORT=8050
 
-
-
+Dev_client
+Rome_client
+Arthur_client
+Client Jules_client()
+client.Client Dev_client("Dev","169.254.34.231", "3476Davinci", 10205,)
+client.Client Rome_client()
+client.Client Arthur_client()
+client.Client Jules_client()
+client.Client AJ_client()
 
 
 if __name__ == "__main__":
