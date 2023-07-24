@@ -10,7 +10,8 @@ class Chat_server:
     def new_client(self, a=client.Client ):
         self.client_list.append(a)
 
-HOST=socket.gethostbyname(socket.gethostname())
+HOST=socket.gethostbyname(socket.getfqdn(socket.gethostname()))
+
 PORT = 8005
 print(HOST)
 print(PORT)
@@ -27,22 +28,35 @@ if __name__ == "__main__":
     print(HOST)
     print(PORT)
     HOST=(input("GIVE ME YOUR IP!\n"))
-    HOST="169.254.24.19"
+    HOST="10.29.58.7"
     PORT=int(input("GIVE ME YOUR PORT!\n"))
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        '''sets new variable s as the socket'''
-        s.bind((HOST, PORT))
+    with socket.socket(socket.AF_INET,socket.SOCK_STREAM) as s:
+    #Binds this socket to our set host and port to create a socket that listens there
+        s.bind((HOST,PORT))
+    #s.listen turns our socket on and listens for inputs, the number inside is the number of connections it can listen for
         s.listen(5)
-        '''sets number of people who can connect and the Host ip and Port'''
-        while True:
-            '''creates loop that runs the server'''
-            conn, addr= s.accept()
-            with conn:
-                
-                data = conn.recv(1024, socket.MSG_DONTWAIT)
-                data = data.decode("UTF-8")
 
+    #If someone tries to make a connection and they have an address then it accepts it into the socket
+        while True:
+            conn, addr= s.accept()
+            conn.send(1024)
+            with conn:
+                print("Address: ", addr)
+                data = conn.recv(1024)
+                data=data.decode("UTF-8")
                 if data == None:
                     break
                 else:
                     print(data.strip())
+                    new_data=data[2:-1]
+                    print(str(new_data))
+                    if (data.strip()) =="Bro":
+                        print("300000")
+                    # if (data.strip())=="ChaCha":
+                    #     Rome_dance(mav_connection)
+                    # if (data.strip())=="Straight":
+                    #     run_motors_timed(mav_connection, 5, Straight)
+                    # if (data.strip())=="Help" or "help" or "h":
+                    #     conn.send()
+                socket.close()
+
