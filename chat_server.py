@@ -1,17 +1,18 @@
 import socket
 ##import datetime
 import requirements.txt
-from "client.py" import Client
+import client
 
 HOST=socket.gethostbyname(socket.gethostname())
 
 
 PORT=8050
 
-Dev_client
-Rome_client
-Arthur_client
-Client Jules_client()
+client.Client Dev_client("Dev","169.254.34.231", "3476Davinci", 10205,)
+client.Client Rome_client()
+client.Client Arthur_client()
+client.Client Jules_client()
+client.Client AJ_client()
 
 
 client_list=[]
