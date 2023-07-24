@@ -12,7 +12,7 @@ if __name__ == "__main__":
         while True:
             conn, addr= s.accept()
             with conn:
-                print("Address: ", addr)
+                
                 data = conn.recv(1024, socket.MSG_DONTWAIT)
                 data = data.decode("UTF-8")
 
