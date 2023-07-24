@@ -11,13 +11,13 @@ import chatroom
 #Initialize the port and IP address of the server
 PORT = 8050
 hostname = socket.gethostname()
-IP = socket.gethostbyname(hostname)
+IP = '10.29.61.108'
 
 #Jules IP: 10.29.48.1
 
 
 def init_connections(num_conns):
-    
+
     '''
     Address variable stores IP and PORT, while connection
     ID is initialized to a value as it will be iterated depending on
@@ -32,7 +32,7 @@ def init_connections(num_conns):
         connid = connid + 1
         print(f'Connecting ID {connid} to {address}')
         server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        server.connect(address)
+        server.connect_ex(address)
         server.setblocking(False)
         try:
             while True:
@@ -43,10 +43,10 @@ def init_connections(num_conns):
                     for i in range(len(messages)):
                         print(messages[i], "\n")
                 except:
-                    print(address)
+                    #print(address)
+                    pass
         except KeyboardInterrupt:
             print(f'Client with ID {connid} leaves the chat')
-            print(data.strip())
 
 if __name__ == '__main__':
     messages = []
