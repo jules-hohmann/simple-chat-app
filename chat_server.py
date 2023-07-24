@@ -4,6 +4,7 @@ import client
 
 
 class Chat_server:
+    # creates Chat_server class that retains a list of clients using the server (other variables and functions will be added)    
     def __init__(self, client, client_list: list = []):
         self.client_list = client_list
 
