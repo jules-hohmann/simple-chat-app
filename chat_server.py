@@ -26,8 +26,9 @@ if __name__ == "__main__":
 
     print(HOST)
     print(PORT)
-    HOST=input("GIVE ME YOUR IP!\n")
-    PORT=input("GIVE ME YOUR PORT!\n")
+    HOST=(input("GIVE ME YOUR IP!\n"))
+    HOST="169.254.24.19"
+    PORT=int(input("GIVE ME YOUR PORT!\n"))
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         '''sets new variable s as the socket'''
         s.bind((HOST, PORT))
