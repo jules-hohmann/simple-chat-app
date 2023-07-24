@@ -29,7 +29,7 @@ def init_connections(num_conns):
     '''
 
 
-    '''
+    
 
     address = (IP, PORT)
     connid = 0
@@ -52,8 +52,8 @@ def init_connections(num_conns):
                     pass
         except KeyboardInterrupt as e:
             print(f'Client with ID {connid} leaves the chat')
-        '''
-    with socket.socket(socket.AF_INET, socket.SOCK_DGRM) as client:
+        
+    #with socket.socket(socket.AF_INET, socket.SOCK_DGRM) as client:
 
 
 
