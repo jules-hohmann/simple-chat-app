@@ -1,17 +1,9 @@
 import socket
 import datetime
-from "client.py" import Client
+import client
 
 HOST="0.0.0.0"
 PORT=8050
-
-class Chat_server:
-    client_list = []
-
-    def new_client(client.Client a):
-        client_list.append(a)
-
-    
 
 
 
