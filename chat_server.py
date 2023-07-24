@@ -1,8 +1,17 @@
 import socket
 import datetime
+from "client.py" import Client
 
 HOST="0.0.0.0"
 PORT=8050
+
+class Chat_server:
+    client_list = []
+
+    def new_client(Client a)
+
+
+
 
 
 if __name__ == "__main__":
