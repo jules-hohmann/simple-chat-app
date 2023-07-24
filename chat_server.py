@@ -22,9 +22,12 @@ AJ_client=client.Client("AJ","169.254.18.213", "ILuvKorea", 54321)
 
 if __name__ == "__main__":
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        '''sets new variable s as the socket'''
         s.bind((HOST, PORT))
         s.listen(5)
+        '''sets number of people who can connect and the Host ip and Port'''
         while True:
+            '''creates loop that runs the server'''
             conn, addr= s.accept()
             with conn:
                 
