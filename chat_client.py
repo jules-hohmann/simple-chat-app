@@ -13,7 +13,10 @@ import chatroom
 PORT = 8050
 IP = '10.29.61.108'
 
+IP='10.29.61.108'
+
 #Jules IP: 10.29.48.1
+#10.29.61.108
 
 
 def init_connections(num_conns):
