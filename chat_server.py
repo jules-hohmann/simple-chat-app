@@ -4,18 +4,14 @@ import client
 
 
 class Chat_server:
-    # creates Chat_server class that retains a list of clients using the server (other variables and functions will be added)    
     def __init__(self, client, client_list: list = []):
         self.client_list = client_list
 
     def new_client(self, a=client.Client ):
         self.client_list.append(a)
 
-
 HOST=socket.gethostbyname(socket.gethostname())
 PORT = 8005
-
-#client.Client grabs the client file and takes the "Client" class, order is: User, IP, password, unique user ID
 
 Dev_client=client.Client("Dev","169.254.34.231", "3476Davinci", 10205,)
 Rome_client=client.Client("Rome","169.254.24.19", "RomePassword31415", 10001)
@@ -26,9 +22,12 @@ AJ_client=client.Client("AJ","169.254.18.213", "ILuvKorea", 54321)
 
 if __name__ == "__main__":
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        '''sets new variable s as the socket'''
         s.bind((HOST, PORT))
         s.listen(5)
+        '''sets number of people who can connect and the Host ip and Port'''
         while True:
+            '''creates loop that runs the server'''
             conn, addr= s.accept()
             with conn:
                 
