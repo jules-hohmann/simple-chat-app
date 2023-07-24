@@ -1,5 +1,3 @@
-
-
 class Chatroom:
     def __init__(self, name, uuid, messages, users):
         self.name = name
