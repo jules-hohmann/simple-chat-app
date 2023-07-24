@@ -8,17 +8,24 @@ import message
 import chatroom
 
 
-
+#Initialize the port and IP address of the server
 PORT = 8050
 hostname = socket.gethostname()
 IP = socket.gethostbyname(hostname)
 
-#IP: 10.29.48.1
-
-
+#Jules IP: 10.29.48.1
 
 
 def init_connections(num_conns):
+    
+    '''
+    Address variable stores IP and PORT, while connection
+    ID is initialized to a value as it will be iterated depending on
+    number of connections. The server is then initialized and the client 
+    is connected using address. Setblocking is set to false prevent waiting.
+    Append decoded messages from the chat to display them.
+    '''
+
     address = (IP, PORT)
     connid = 0
     for i in range(1, len(num_conns) + 1):
