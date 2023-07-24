@@ -11,6 +11,7 @@ class Chat_server:
 
     def new_client(client.Client a):
         client_list.append(a)
+        
 HOST=socket.gethostbyname(socket.gethostname())
 PORT = 8005
 
