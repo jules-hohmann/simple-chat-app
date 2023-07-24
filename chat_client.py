@@ -9,6 +9,7 @@ import chatroom
 
 
 #Initialize the port and IP address of the server
+#When it runs gethostname, it finds the IP of the computer it's running on
 PORT = 8050
 hostname = socket.gethostname()
 IP = '10.29.61.108'
