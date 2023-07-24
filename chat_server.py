@@ -2,6 +2,7 @@ import socket
 import datetime
 import client
 
+<<<<<<< HEAD
 HOST="0.0.0.0"
 PORT=8050
 
@@ -11,14 +12,21 @@ class Chat_server:
 
     def new_client(client.Client a):
         client_list.append(a)
+=======
+HOST=socket.gethostbyname(socket.gethostname())
+PORT = 8005
+>>>>>>> 74643222b7b24104916805f14059c96d30e12996
 
 Dev_client=client.Client("Dev","169.254.34.231", "3476Davinci", 10205,)
 Rome_client=client.Client("Rome","169.254.24.19", "RomePassword31415", 10001)
+<<<<<<< HEAD
+Arthur_client=client.Client("Arthur","169.254.36.171", "SubToMe123", 69696)
+AJ_client=client.Client("AJ","169.254.18.213", "ILuvKorea", 54321)
+=======
 Arthur_client=client.Client()
-Jules_client=client.Client()
+Jules_client=client.Client("Jules", "10.29.61.108", "12345")
 AJ_client=client.Client()
-
-
+>>>>>>> c026605ab136f04c762c8bf3fbab8b43c31b9963
 
 
 if __name__ == "__main__":
