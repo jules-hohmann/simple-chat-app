@@ -10,7 +10,7 @@ class Chat_server:
     def new_client(self, a=client.Client ):
         self.client_list.append(a)
 
-HOST=socket.gethostbyname(socket.gethostname())
+HOST = ""
 PORT = 8005
 print(HOST)
 print(PORT)
