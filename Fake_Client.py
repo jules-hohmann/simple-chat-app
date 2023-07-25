@@ -22,7 +22,7 @@ def send(msg):
     
 conn=True
 
-while conn==True:
+while conn:
     send(input())
     if input==DISCONNECT_MESSAGE:
         conn.close()
