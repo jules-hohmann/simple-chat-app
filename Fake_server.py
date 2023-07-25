@@ -1,23 +1,42 @@
 import socket
 import threading
+import client.py
 
 
 ##SERVER=socket.gethostbyname(socket.getfqdn(socket.gethostname()))
 
+
+
+
+
 SERVER="10.29.58.7"
-PORT = 8006
+PORT = 8008
 HEADER=16
 FORMAT="UTF-8"
 server= socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 server.bind((SERVER,PORT))
-
-
 DISCONNECT_MESSAGE="--Leave"
 
+client=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+
+
+def send(msg):
+    message=msg.encode(FORMAT)
+    msg_length=len(message)
+    send_length=str(msg_length).encode(FORMAT)
+    ##Ensuring that the message we send is of the right length
+    send_length+=b" "*(HEADER- len(send_length))
+    client.send(send_length)
+    client.send(message)
+
+
 def handle_client(conn,addr):
+    
+
     i=0
     print(f"[NEW CONNECTION]{addr}")
-    
+    # client=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+    # client.bind((conn))
 
     connected=True
     while connected:
@@ -31,6 +50,8 @@ def handle_client(conn,addr):
             if i <= 100:
                 print(f"[{addr}][{i}] {message}")
                 i+=1
+                conn.send("Message Received".encode(FORMAT))
+                
     conn.close()
 
 

@@ -1,7 +1,7 @@
 import socket
 
 HEADER=16
-PORT=8006
+PORT=8008
 SERVER="10.29.58.7"
 ADDR=(SERVER,PORT)
 FORMAT="UTF-8"
@@ -18,7 +18,8 @@ def send(msg):
     send_length+=b" "*(HEADER- len(send_length))
     client.send(send_length)
     client.send(message)
-
+    print(client.recv(2048).decode(FORMAT))
+    
 conn=True
 
 while conn==True:
