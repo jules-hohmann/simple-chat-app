@@ -12,7 +12,7 @@ import sys
 
 #Initialize the port and IP address of the server
 #When it runs gethostname, it finds the IP of the computer it's running on
-PORT = 8005
+PORT = 8008
 #SERVERIP = '10.29.61.108'
 CLIENTS = []
 
@@ -38,8 +38,8 @@ def init_connection():
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         try:
-            print("yay")
             s.connect(address)
+            print("yay")
         except:
             print("bad")
         print(address)
