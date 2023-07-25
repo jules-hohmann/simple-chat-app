@@ -1,59 +1,28 @@
 import socket
-import datetime
 
-import server
-import chat_server
-import client
-import message
-import chatroom
+HEADER=16
+PORT=8008
+SERVER="10.29.58.7"
+ADDR=(SERVER,PORT)
+FORMAT="UTF-8"
+DISCONNECT_MESSAGE="--Leave"
 
+client=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+client.connect(ADDR)
 
-#Initialize the port and IP address of the server
-#When it runs gethostname, it finds the IP of the computer it's running on
+def send(msg):
+    message=msg.encode(FORMAT)
+    msg_length=len(message)
+    send_length=str(msg_length).encode(FORMAT)
+    ##Ensuring that the message we send is of the right length
+    send_length+=b" "*(HEADER- len(send_length))
+    client.send(send_length)
+    client.send(message)
 
+conn=True
 
-#Jules IP: 10.29.48.1
-#10.29.61.108
-
-
-def init_connection():
-
-    PORT=int(input("GIVE ME YOUR PORT!\n"))
-    HOST= str(input("GIVE ME YOUR IP\n"))
-
-    address = (HOST, (PORT))
-    print(f'Connecting ID {"Jules"} to {address}')
-
-
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        s.bind((HOST, PORT))
-        s.listen(5)
-        conn, addr = s.accept()
-    
-        with conn:
-            while True:
-                data = conn.recv(1024)
-                data = data.decode("UTF-8")
-                if data == None:
-                    break
-                else:
-                    print(data.strip())
-                    new_data=data[2:-1]
-                    print(str(new_data))
-
-                    socket.close
-
-
-if __name__ == '__main__':
-    messages = []
-    connid = 0
-    init_connection()
-
-
-            
-
-            
-
-        
-        
-
+while conn==True:
+    send(input())
+    if input==DISCONNECT_MESSAGE:
+        conn.close()
+        conn=False
