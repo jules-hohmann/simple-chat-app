@@ -10,10 +10,7 @@ class Chat_server:
     def new_client(self, a=client.Client ):
         self.client_list.append(a)
 
-HOST=socket.gethostbyname(socket.gethostname())
-PORT = 8005
-print(HOST)
-print(PORT)
+
 
 Dev_client=client.Client("Dev","169.254.34.231", "3476Davinci", 10205,)
 Rome_client=client.Client("Rome","169.254.24.19", "RomePassword31415", 10001)
@@ -24,14 +21,14 @@ AJ_client=client.Client("AJ","169.254.18.213", "ILuvKorea", 54321)
 
 if __name__ == "__main__":
 
-    print(HOST)
-    print(PORT)
+    
     HOST=(input("GIVE ME YOUR IP!\n"))
-    HOST="169.254.24.19"
+    
     PORT=int(input("GIVE ME YOUR PORT!\n"))
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         '''sets new variable s as the socket'''
-        s.bind((HOST, PORT))
+        address = (HOST, PORT)
+        s.bind(address)
         s.listen(5)
         '''sets number of people who can connect and the Host ip and Port'''
         while True:
