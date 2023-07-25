@@ -37,7 +37,12 @@ def init_connection():
     #where server ip is HOST and PORT is PORT
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        s.connect(address)
+        try:
+            s.connect(address)
+            print("yay")
+        except:
+            print("bad")
+        print(address)
         chat_uuid = uuid.uuid3() #will contain network address
         #conn, addr = s.accept()
         while True:
@@ -51,7 +56,7 @@ def init_connection():
                 sys.exit(cl.username)
                 return
             else:
-                s.send(message.encode("utf-8"))
+                s.send("<" + cl.username + " " + cl.uuid + " >",{message.encode("utf-8")})
 
                 
 
