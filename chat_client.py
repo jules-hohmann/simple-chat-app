@@ -38,12 +38,12 @@ def init_connection():
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         try:
-            s.connect(address)
             print("yay")
+            s.connect(address)
         except:
             print("bad")
         print(address)
-        chat_uuid = uuid.uuid3() #will contain network address
+        chat_uuid = uuid.uuid4() #will contain network address
         #conn, addr = s.accept()
         while True:
             message_input = s.recv(1024).decode("utf-8")
