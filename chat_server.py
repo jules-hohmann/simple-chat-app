@@ -39,6 +39,7 @@ if __name__ == "__main__":
             conn, addr= s.accept()
             conn.send(1024)
             with conn:
+                
                 print("Address: ", addr)
                 data = conn.recv(1024)
                 data=data.decode("UTF-8")
