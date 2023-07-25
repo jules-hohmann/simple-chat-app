@@ -5,46 +5,54 @@ import server
 import chat_server
 import client
 import message
+import uuid
 import chatroom
+import sys
 
-cl = client.Client()
-se = server.Server()
 
 #Initialize the port and IP address of the server
 #When it runs gethostname, it finds the IP of the computer it's running on
-se.port = 8005
-se.ip = '10.29.61.108'
+PORT = 8005
+#SERVERIP = '10.29.61.108'
+CLIENTS = []
 
 
 #Jules IP: 10.29.48.1
-#10.29.61.108
+#Jules IP: 10.29.61.108
+
+def broadcast():
+    pass
 
 
-def init_connections(num_conns):
-    with socket.socket(socket.AF_INET, socket.SOCK_DGRM) as s:
+def init_connection():
+    username = input("Username: ")
+    password = input("Password: ")
+    personal_ip = input("Personal IP: ")
+    client_uuid = uuid.uuid4()
 
-        username = input("Username: ")
-        password = input("Password: ")
-        uuid = input("UUID: ")
-        personal_ip = input("IP: ")
+    cl = client.Client(username, personal_ip, password, uuid)
+    se = server.Server(SERVERIP, PORT)
 
-        cl.username = username
-        cl.password = password
-        cl.uuid = uuid
-        cl.ip_address = personal_ip
+    address = (se.ip, se.port)
+    #where server ip is HOST and PORT is PORT
 
-        s.connect(se.ip, se.port)
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.connect(address)
+        chat_uuid = uuid.uuid3() #will contain network address
+        #conn, addr = s.accept()
+        while True:
+            message_input = s.recv(1024).decode("utf-8")
+            print(message_input)
+            print("Enter Message: ")
+            message = input()
 
-        conn, addr = s.accept()
-        
-        with conn, addr:
-            while True:
-                if addr == se.ip:
-                    data = conn.recv(1024, socket.MSG_DONTWAIT)
-                    if(data.strip() == "STOP"):
-                        s.close()
-                    else:
-                        continue
+            if message == "LEAVE":
+                s.close()
+                sys.exit(cl.username)
+                return
+            else:
+                s.send(message.encode("utf-8"))
+
                 
 
     '''
@@ -80,11 +88,9 @@ def init_connections(num_conns):
 
 
 if __name__ == '__main__':
-    messages = []
-    connid = 0
-    IP=input("Give me your IP")
-    PORT=input("Give me your port")
-    init_connections([1])
+    SERVERIP = input("Enter HOST/Server IP Adress: ")
+    init_connection()
+
             
 
             
