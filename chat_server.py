@@ -14,8 +14,7 @@ server = Server('0.0.0.0', 8001)
 
 if __name__ == "__main__":
 
-    print(HOST)
-    print(PORT)
+   
     HOST=(input("GIVE ME YOUR IP!\n"))
     HOST="169.254.24.19"
     PORT=int(input("GIVE ME YOUR PORT!\n"))
