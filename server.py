@@ -1,6 +1,5 @@
 class Server:
-    def __init__(self, ip_address, port, servername="Headspace"):
-        self.ip= ip_address
+    def __init__(self, ip = '0.0.0.0', port = 8001):
+        self.ip= ip
         self.port=port
-        self.servername=servername
 

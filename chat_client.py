@@ -1,34 +1,37 @@
 import socket
 import datetime
 import uuid
-import _thread
 from client import Client
 from server import Server
 from message import Message
 from threading import Thread
+import os
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-PORT = 8005
-IP_ADDRESS = '10.29.61.108'
+PORT = 8001
+IP_ADDRESS = '0.0.0.0'
 
-username = input("Enter your username")
-password = input("Enter your password")
-uuid = uuid.uuid1()
+username = input("Username: ")
+password = input("Password: ")
+uuid = uuid.uuid4()
+se = Server(IP_ADDRESS, PORT)
+cl = Client(username, IP_ADDRESS, password, uuid)
 
-user = Client(username, IP_ADDRESS, password, uuid)
-server = Server(IP_ADDRESS, PORT)
 
-s.connect((server.ip_address, server.port))
+s.connect((se.ip, se.port))
 
-def listen():
+def receive():
     while True:
-        message = input()
-        raw_message = Message(user, message)
-        print(raw_message.create_message().decode())
-        s.send(message.encode())
+        message = input("Enter a message (First: username ip )> ")
+        if message == "--Leave":
+            s.close()
+            os._exit(1)
+        unformatted_message = Message(cl, message)
+        print(unformatted_message.format_message().decode())
+        s.send(message.encode("utf-8"))
 
-thread = Thread(target = listen, args = ())
+thread = Thread(target = receive, args = ())
 thread.start()
 thread.join()
 
