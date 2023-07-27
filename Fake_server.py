@@ -10,7 +10,7 @@ import client
 
 
 SERVER="10.29.58.7"
-PORT = 8008
+PORT = 8006
 HEADER=16
 FORMAT="UTF-8"
 server= socket.socket(socket.AF_INET,socket.SOCK_STREAM)

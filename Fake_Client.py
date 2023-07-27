@@ -26,8 +26,7 @@ def send(msg):
 
 conn=True
 
-while conn:
-    print(client.recv(2048).decode(FORMAT))
+while conn==True:
     send(input())
     if input==DISCONNECT_MESSAGE:
         conn.close()
