@@ -1,28 +1,72 @@
 import socket
+import datetime
+import uuid
+from client import Client
+from server import Server
+from message import Message
+from threading import Thread
+import os
 
-HEADER=16
-PORT=8008
-SERVER="10.29.58.7"
-ADDR=(SERVER,PORT)
-FORMAT="UTF-8"
-DISCONNECT_MESSAGE="--Leave"
+import server
+import chat_server
+import client
+import message
+import chatroom
 
-client=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-client.connect(ADDR)
 
-def send(msg):
-    message=msg.encode(FORMAT)
-    msg_length=len(message)
-    send_length=str(msg_length).encode(FORMAT)
-    ##Ensuring that the message we send is of the right length
-    send_length+=b" "*(HEADER- len(send_length))
-    client.send(send_length)
-    client.send(message)
+#Initialize the port and IP address of the server
+#When it runs gethostname, it finds the IP of the computer it's running on
+PORT = 8005
+IP = '10.29.61.108'
 
-conn=True
+IP='10.29.61.108'
 
-while conn==True:
-    send(input())
-    if input==DISCONNECT_MESSAGE:
-        conn.close()
-        conn=False
+#Jules IP: 10.29.48.1
+#10.29.61.108
+
+
+def init_connections(num_conns):
+
+    '''
+    Address variable stores IP and PORT, while connection
+    ID is initialized to a value as it will be iterated depending on
+    number of connections. The server is then initialized and the client 
+    is connected using address. Setblocking is set to false prevent waiting.
+    Append decoded messages from the chat to display them.
+    '''
+
+    address = (IP, PORT)
+    connid = 0
+    for i in range(1, len(num_conns) + 1):
+        connid = connid + 1
+        print(f'Connecting ID {connid} to {address}')
+        server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        server.connect_ex(address)
+        server.setblocking(False)
+        try:
+            while True:
+                try:
+                    data = server.recv(1024)
+                    data.decode("UTF-8")
+                    messages.append(data)
+                    for i in range(len(messages)):
+                        print(messages[i], "\n")
+                except:
+                    #print(address)
+                    pass
+        except KeyboardInterrupt:
+            print(f'Client with ID {connid} leaves the chat')
+
+if __name__ == '__main__':
+    messages = []
+    connid = 0
+    IP=input("Give me your IP")
+    PORT=input("Give me your port")
+    init_connections([1])
+            
+
+            
+
+        
+        
+
