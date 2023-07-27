@@ -12,7 +12,7 @@ class Chat_server:
 
 HOST=socket.gethostbyname(socket.getfqdn(socket.gethostname()))
 
-PORT = 8005
+PORT = 8008
 print(HOST)
 print(PORT)
 
@@ -28,7 +28,7 @@ if __name__ == "__main__":
     print(HOST)
     print(PORT)
     HOST=(input("GIVE ME YOUR IP!\n"))
-    HOST="10.29.58.7"
+    HOST="10.29.61.108"
     PORT=int(input("GIVE ME YOUR PORT!\n"))
     with socket.socket(socket.AF_INET,socket.SOCK_STREAM) as s:
     #Binds this socket to our set host and port to create a socket that listens there
