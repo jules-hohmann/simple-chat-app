@@ -32,7 +32,7 @@ if __name__ == "__main__":
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         '''sets new variable s as the socket'''
         address = (HOST, PORT)
-        s.bind(address)
+        
         s.listen(5)
 
     #If someone tries to make a connection and they have an address then it accepts it into the socket
@@ -40,11 +40,21 @@ if __name__ == "__main__":
             conn, addr= s.accept()
             conn.send(1024)
             with conn:
-                
-                data = conn.recv(1024, socket.MSG_DONTWAIT)
-                data = data.decode("UTF-8")
-
+                print("Address: ", addr)
+                data = conn.recv(1024)
+                data=data.decode("UTF-8")
                 if data == None:
                     break
                 else:
                     print(data.strip())
+                    new_data=data[2:-1]
+                    print(str(new_data))
+                    if (data.strip()) =="Bro":
+                        print("300000")
+                    # if (data.strip())=="ChaCha":
+                    #     Rome_dance(mav_connection)
+                    # if (data.strip())=="Straight":
+                    #     run_motors_timed(mav_connection, 5, Straight)
+                    # if (data.strip())=="Help" or "help" or "h":
+                    #     conn.send()
+                socket.close()
