@@ -1,4 +1,6 @@
 import socket
+import sys
+
 
 #why is it client and not server or s
 
@@ -21,16 +23,19 @@ def send(msg):
     client.send(send_length)
     client.send(message)
     print(client.recv(2048).decode(FORMAT))
-    
+
 conn=True
 
 while conn:
-    message_input = client.recv(1024).decode("utf-8")
-    if message_input != '':
-        print(message_input)
-    client.send(input())
+    print(client.recv(2048).decode(FORMAT))
+    send(input())
     if input==DISCONNECT_MESSAGE:
         conn.close()
         conn=False
+    if KeyboardInterrupt:
+        print ("Closing Connection")
+        conn.close()
+        conn=False
+        sys.exit()
 
 

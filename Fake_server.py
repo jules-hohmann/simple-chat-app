@@ -1,6 +1,6 @@
 import socket
 import threading
-import client.py
+import client
 
 
 ##SERVER=socket.gethostbyname(socket.getfqdn(socket.gethostname()))
@@ -31,7 +31,7 @@ def send(msg):
 
 
 def handle_client(conn,addr):
-    
+
 
     i=0
     print(f"[NEW CONNECTION]{addr}")
@@ -47,11 +47,17 @@ def handle_client(conn,addr):
             message=message.strip()
             if message==DISCONNECT_MESSAGE:
                 connected=False
+            ##this gives message IDs up to 100 for each IP
+            if i==0:
+                conn.send(f"Welcome to Headspace!\n Your IP and port are:{addr}\n".encode(FORMAT))
+                conn.send(f"Please make your first an second messages your IP and Port, respectively.".encode(FORMAT))
             if i <= 100:
                 print(f"[{addr}][{i}] {message}")
                 i+=1
                 conn.send("Message Received".encode(FORMAT))
+                conn.send(f"{message}".encode(FORMAT))
                 
+
     conn.close()
 
 
