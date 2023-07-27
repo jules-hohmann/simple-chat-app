@@ -1,7 +1,7 @@
 import socket
 
 HEADER=16
-PORT=8006
+PORT=8008
 SERVER="10.29.58.7"
 ADDR=(SERVER,PORT)
 FORMAT="UTF-8"
@@ -22,6 +22,8 @@ def send(msg):
 conn=True
 
 while conn==True:
+    message_input = client.recv(1024).decode("utf-8)")
+    print(message_input)
     send(input())
     if input==DISCONNECT_MESSAGE:
         conn.close()

@@ -4,7 +4,7 @@ import threading
 
 ##SERVER=socket.gethostbyname(socket.getfqdn(socket.gethostname()))
 
-SERVER="10.29.58.7"
+SERVER="10.29.61.108"
 PORT = 8006
 HEADER=16
 FORMAT="UTF-8"
