@@ -29,15 +29,14 @@ def send(msg):
     client.send(send_length)
     client.send(message)
 
+name = []
 
 def handle_client(conn,addr):
 
-
-    i=0
     print(f"[NEW CONNECTION]{addr}")
     # client=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
     # client.bind((conn))
-
+    i=0
     connected=True
     while connected:
         msg_length=conn.recv(HEADER).decode(FORMAT)
@@ -47,16 +46,17 @@ def handle_client(conn,addr):
             message=message.strip()
             if message==DISCONNECT_MESSAGE:
                 connected=False
-            ##this gives message IDs up to 100 for each IP
+             ##this gives message IDs up to 100 for each IP
             if i==0:
                 conn.send(f"Welcome to Headspace!\n Your IP and port are:{addr}\n".encode(FORMAT))
                 conn.send(f"Please make your first an second messages your IP and Port, respectively.".encode(FORMAT))
+                name.append = conn.send("Name:" + input())
             if i <= 100:
-                print(f"[{addr}][{i}] {message}")
+                conn.send(f"[{addr}][{name[i]}] {message}")
                 i+=1
                 conn.send("Message Received".encode(FORMAT))
                 conn.send(f"{message}".encode(FORMAT))
-                
+                    
 
     conn.close()
 

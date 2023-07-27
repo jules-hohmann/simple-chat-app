@@ -1,8 +1,8 @@
 import socket
 
 HEADER=16
-PORT=8006
-SERVER="10.29.28.72"
+PORT=8008
+SERVER="10.29.61.108"
 ADDR=(SERVER,PORT)
 FORMAT="UTF-8"
 DISCONNECT_MESSAGE="--Leave"
@@ -23,6 +23,7 @@ conn=True
 
 while conn==True:
     send(input())
+    print(conn.recv().decode(FORMAT))
     if input==DISCONNECT_MESSAGE:
         conn.close()
         conn=False
