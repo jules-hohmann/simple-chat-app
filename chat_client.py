@@ -15,7 +15,8 @@ import _thread
 #Initialize the port and IP address of the server
 #When it runs gethostname, it finds the IP of the computer it's running on
 PORT = 8008
-SERVERIP = '10.29.61.108'
+#SERVERIP = '10.29.61.108'
+SERVERIP = '0.0.0.0'
 CLIENTS = []
 
 clientSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

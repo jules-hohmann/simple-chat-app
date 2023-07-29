@@ -3,7 +3,8 @@ from client import Client
 import socket
 import _thread
 
-serverIP = "10.29.61.108"
+#serverIP = "10.29.61.108"
+serverIP = "0.0.0.0"
 serverPort = 8008
 serverClients = {}
 
