@@ -9,58 +9,69 @@ import uuid
 import chatroom
 import sys
 
+import _thread
+
 
 #Initialize the port and IP address of the server
 #When it runs gethostname, it finds the IP of the computer it's running on
 PORT = 8008
-#SERVERIP = '10.29.61.108'
+SERVERIP = '10.29.61.108'
 CLIENTS = []
+
+clientSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+
 
 
 #Jules IP: 10.29.48.1
 #Jules IP: 10.29.61.108
+username = ''
+password = ''
 
-def broadcast():
-    pass
-
-
-def init_connection():
+while len(username) == 0:
     username = input("Username: ")
+while len(password) == 0:
     password = input("Password: ")
-    personal_ip = input("Personal IP: ")
-    client_uuid = uuid.uuid4()
+personal_ip = socket.gethostbyname(socket.gethostname())
+client_uuid = uuid.uuid1()
 
-    cl = client.Client(username, personal_ip, password, uuid)
-    se = server.Server(SERVERIP, PORT)
 
-    address = (se.ip, se.port)
-    #where server ip is HOST and PORT is PORT
 
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        try:
-            s.connect(address)
-            print("yay")
-        except:
-            print("bad")
-        print(address)
-        chat_uuid = uuid.uuid4() #will contain network address
-        #conn, addr = s.accept()
-        while True:
-            message_input = s.recv(1024).decode("utf-8")
-            print(message_input)
-            print("Enter Message: ")
-            message = input()
 
-            if message == "LEAVE":
-                s.close()
-                sys.exit(cl.username)
-                return
-            else:
-                s.send("<" + cl.username + " " + cl.uuid + " >",{message.encode("utf-8")})
+cl = client.Client(username, personal_ip, password, uuid)
+se = server.Server(SERVERIP, PORT)
 
-                
+address = (se.ip, se.port)
+#where server ip is HOST and PORT is PORT
 
-    '''
+try:
+    clientSocket.connect(address)
+except:
+    print("Connection Failed")
+
+
+#will contain network address
+#conn, addr = s.accept()
+clientInfo = "INFO: " + cl.username + " " + cl.uuid
+clientSocket.send(clientInfo.encode())
+
+def listen():
+    while True:
+        message_input = clientSocket.recv(1024).decode("utf-8")
+        print(message_input)
+
+_thread.start_new_thread(listen(), ())
+
+while True:
+    message = input(cl.username + ": ")
+    message = cl.username + ": " + message
+    if message == "LEAVE":
+        clientSocket.close()
+        sys.exit(cl.username)
+    else:
+        clientSocket.send("<" + cl.username + " " + cl.uuid + " >",{message.encode("utf-8")}) 
+
+'''
     Address variable stores IP and PORT, while connection
     ID is initialized to a value as it will be iterated depending on
     number of connections. The server is then initialized and the client 
@@ -91,10 +102,6 @@ def init_connection():
             print(f'Client with ID {connid} leaves the chat')
         '''
 
-
-if __name__ == '__main__':
-    SERVERIP = input("Enter HOST/Server IP Adress: ")
-    init_connection()
 
             
 

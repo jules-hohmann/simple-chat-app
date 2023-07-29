@@ -1,48 +1,40 @@
+from server import Server
+from client import Client
 import socket
-import datetime
-import client
+import _thread
 
+serverIP = "10.29.61.108"
+serverPort = 8008
+serverClients = {}
 
-class Chat_server:
-    def __init__(self, client, client_list: list = []):
-        self.client_list = client_list
+server = Server(serverIP, serverPort) 
 
-    def new_client(self, a=client.Client ):
-        self.client_list.append(a)
+serverSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
+serverSocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) #reusability
+serverSocket.bind((serverIP, serverPort))
 
-HOST=socket.gethostbyname(socket.gethostname())
-PORT = 8005
-print(HOST)
-print(PORT)
+def broadcastMessages(message, addr):
+    print(message)
+    for client in serverClients:
+        if(addr[0] != client):
+            connection = serverClients[client][0]
+            connection.send(message.encode())
 
-Dev_client=client.Client("Dev","169.254.34.231", "3476Davinci", 10205,)
-Rome_client=client.Client("Rome","169.254.24.19", "RomePassword31415", 10001)
-Arthur_client=client.Client("Arthur","169.254.36.171", "SubToMe123", 69696)
-AJ_client=client.Client("AJ","169.254.18.213", "ILuvKorea", 54321)
+def acceptClientsAndMessages(conn, addr):
+    while True:
+        data = conn.recv(1024)
+        msg = data.decode()
+        if(msg[0:4] == "INFO"):
+            userInformation = msg[6:].split(" ")
+            serverClients[addr[0]].append(userInformation[0])
+            serverClients[addr[0]].append(userInformation[1])
+            print("Welcome " + serverClients[addr[0]][1] + "!")
+        else:
+            broadcastMessages(msg, addr)
 
-
-
-if __name__ == "__main__":
-
-    print(HOST)
-    print(PORT)
-    HOST=(input("GIVE ME YOUR IP!\n"))
-    HOST="169.254.24.19"
-    PORT=int(input("GIVE ME YOUR PORT!\n"))
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        '''sets new variable s as the socket'''
-        s.bind((HOST, PORT))
-        s.listen(5)
-        '''sets number of people who can connect and the Host ip and Port'''
-        while True:
-            '''creates loop that runs the server'''
-            conn, addr= s.accept()
-            with conn:
-                
-                data = conn.recv(1024, socket.MSG_DONTWAIT)
-                data = data.decode("UTF-8")
-
-                if data == None:
-                    break
-                else:
-                    print(data.strip())
+while True:
+    serverSocket.listen(5)
+    conn, addr = serverSocket.accept()
+    serverClients[addr[0]] = [conn]
+    conn.send(("Welcome!").encode())
+    _thread.start_new_thread(acceptClientsAndMessages, (conn, addr))
