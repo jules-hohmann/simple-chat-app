@@ -14,15 +14,12 @@ import _thread
 
 #Initialize the port and IP address of the server
 #When it runs gethostname, it finds the IP of the computer it's running on
-PORT = 8008
+PORT = 8009
 #SERVERIP = '10.29.61.108'
 SERVERIP = '0.0.0.0'
 CLIENTS = []
 
 clientSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-
-
 
 #Jules IP: 10.29.48.1
 #Jules IP: 10.29.61.108
@@ -35,9 +32,6 @@ while len(password) == 0:
     password = input("Password: ")
 personal_ip = socket.gethostbyname(socket.gethostname())
 client_uuid = uuid.uuid1()
-
-
-
 
 cl = client.Client(username, personal_ip, password, uuid)
 se = server.Server(SERVERIP, PORT)

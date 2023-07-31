@@ -4,8 +4,8 @@ import socket
 import _thread
 
 #serverIP = "10.29.61.108"
-serverIP = "0.0.0.0"
-serverPort = 8008
+serverIP = "10.29.191.11"
+serverPort = 8009
 serverClients = {}
 
 server = Server(serverIP, serverPort) 
